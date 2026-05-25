@@ -125,7 +125,15 @@ export default function App() {
             <Route path={"ai/mcp"} element={<AiSettings />} />
             <Route path={"audit"} element={<AuditLogs />} />
             <Route path={"verifications"} element={<VerifiedPages />} />
-            {!isCloud() && <Route path={"license"} element={<License />} />}
+            {!isCloud() && (
+              <>
+                <Route path={"product-scope"} element={<License />} />
+                <Route
+                  path={"license"}
+                  element={<Navigate to="/settings/product-scope" replace />}
+                />
+              </>
+            )}
             {isCloud() && <Route path={"billing"} element={<Billing />} />}
           </Route>
         </Route>

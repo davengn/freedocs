@@ -25,13 +25,13 @@ export default function LicenseDetails() {
         withTableBorder
       >
         <Table.Caption>
-          Contact sales@docmost.com for support and enquiries.
+          Freedocs free scope remains available for every workspace.
         </Table.Caption>
         <Table.Tbody>
           <Table.Tr>
             <Table.Th w={160}>Edition</Table.Th>
             <Table.Td>
-              {license.licenseType === "business" ? "Business" : "Enterprise"}{" "}
+              {license.licenseType === "business" ? "Business" : "Legacy"}{" "}
               {license.trial && <Badge color="green">Trial</Badge>}
             </Table.Td>
           </Table.Tr>

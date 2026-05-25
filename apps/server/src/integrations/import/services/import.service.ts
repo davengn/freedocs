@@ -173,7 +173,7 @@ export class ImportService {
         'DOCX import requested but EE module not bundled in this build',
       );
       throw new BadRequestException(
-        'This feature requires a valid enterprise license.',
+        'DOCX import is not available in this build.',
       );
     }
 
@@ -209,7 +209,7 @@ export class ImportService {
         'PDF import requested but EE module not bundled in this build',
       );
       throw new BadRequestException(
-        'This feature requires a valid enterprise license.',
+        'PDF import is not available in this build.',
       );
     }
 

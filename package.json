@@ -1,6 +1,6 @@
 {
-  "name": "docmost",
-  "homepage": "https://docmost.com",
+  "name": "freedocs",
+  "homepage": "https://freedocs.local",
   "version": "0.90.0",
   "private": true,
   "scripts": {

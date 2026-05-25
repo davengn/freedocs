@@ -20,7 +20,7 @@ export const useTrialEndAction = () => {
           color: "red",
           title: `Your ${getBillingTrialDays()}-day trial has ended`,
           message:
-            "Please upgrade to a paid plan or contact your workspace admin.",
+            "Contact your workspace administrator to continue using this hosted service.",
           autoClose: false,
         });
 

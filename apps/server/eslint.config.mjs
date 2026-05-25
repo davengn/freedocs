@@ -9,7 +9,14 @@ export default [
   ...tseslint.configs.recommended,
   eslintConfigPrettier,
   {
-    ignores: ['eslint.config.mjs'],
+    ignores: [
+      'eslint.config.mjs',
+      'node_modules',
+      'dist',
+      'build',
+      'coverage',
+      '*.min.js',
+    ],
   },
   {
     languageOptions: {

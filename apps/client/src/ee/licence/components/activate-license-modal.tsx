@@ -28,7 +28,7 @@ export default function ActivateLicense() {
         size="550"
         opened={opened}
         onClose={close}
-        title={t("Enterprise license")}
+        title={t("Compatibility license")}
         centered
       >
         <ActivateLicenseForm onClose={close} />

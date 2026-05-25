@@ -345,30 +345,68 @@ export class WorkspaceService {
       }
 
       if (typeof updateWorkspaceDto.mcpEnabled !== 'undefined') {
-        if (!this.licenseCheckService.hasFeature(ws.licenseKey, 'mcp', ws.plan)) {
+        if (
+          !this.licenseCheckService.hasFeature(
+            ws.licenseKey,
+            Feature.MCP,
+            ws.plan,
+          )
+        ) {
           throw new ForbiddenException(
-            'This feature requires a valid license',
+            'This feature is not available in the current workspace',
           );
         }
       }
 
       if (typeof updateWorkspaceDto.isScimEnabled !== 'undefined') {
-        if (!this.licenseCheckService.hasFeature(ws.licenseKey, Feature.SCIM, ws.plan)) {
+        if (
+          !this.licenseCheckService.hasFeature(
+            ws.licenseKey,
+            Feature.SCIM,
+            ws.plan,
+          )
+        ) {
           throw new ForbiddenException(
-            'This feature requires a valid license',
+            'This feature is not available in the current workspace',
           );
         }
       }
 
       if (
-        typeof updateWorkspaceDto.disablePublicSharing !== 'undefined' ||
-        typeof updateWorkspaceDto.trashRetentionDays !== 'undefined' ||
-        typeof updateWorkspaceDto.restrictApiToAdmins !== 'undefined' ||
-        typeof updateWorkspaceDto.allowMemberTemplates !== 'undefined'
+        typeof updateWorkspaceDto.disablePublicSharing !== 'undefined' &&
+        !this.licenseCheckService.hasFeature(
+          ws.licenseKey,
+          Feature.SHARING_CONTROLS,
+          ws.plan,
+        )
       ) {
-        if (!this.licenseCheckService.hasFeature(ws.licenseKey, Feature.SECURITY_SETTINGS, ws.plan)) {
+        throw new ForbiddenException('This feature is disabled by policy');
+      }
+
+      if (
+        typeof updateWorkspaceDto.allowMemberTemplates !== 'undefined' &&
+        !this.licenseCheckService.hasFeature(
+          ws.licenseKey,
+          Feature.TEMPLATES,
+          ws.plan,
+        )
+      ) {
+        throw new ForbiddenException('This feature is disabled by policy');
+      }
+
+      if (
+        typeof updateWorkspaceDto.trashRetentionDays !== 'undefined' ||
+        typeof updateWorkspaceDto.restrictApiToAdmins !== 'undefined'
+      ) {
+        if (
+          !this.licenseCheckService.hasFeature(
+            ws.licenseKey,
+            Feature.SECURITY_SETTINGS,
+            ws.plan,
+          )
+        ) {
           throw new ForbiddenException(
-            'This feature requires a valid license',
+            'This feature is not available in the current workspace',
           );
         }
       }
@@ -813,7 +851,7 @@ export class WorkspaceService {
       await this.userRepo.updateUser(
         {
           name: 'Deleted user',
-          email: v4() + '@deleted.docmost.com',
+          email: v4() + '@deleted.freedocs.local',
           avatarUrl: null,
           settings: null,
           deletedAt: new Date(),

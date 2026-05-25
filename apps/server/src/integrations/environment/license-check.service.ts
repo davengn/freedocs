@@ -1,5 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
+import {
+  FeatureKey,
+  FREEDOCS_FREE_FEATURE_SET,
+} from '../../common/features';
 import { EnvironmentService } from './environment.service';
 
 @Injectable()
@@ -27,6 +31,10 @@ export class LicenseCheckService {
   }
 
   hasFeature(licenseKey: string, feature: string, plan?: string): boolean {
+    if (this.isFreedocsFreeFeature(feature)) {
+      return true;
+    }
+
     if (this.environmentService.isCloud()) {
       try {
         // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -56,9 +64,11 @@ export class LicenseCheckService {
       const licenseService = this.moduleRef.get(LicenseModule.LicenseService, {
         strict: false,
       });
-      return licenseService.getFeatures(licenseKey);
+      return this.mergeWithFreedocsFreeFeatures(
+        licenseService.getFeatures(licenseKey),
+      );
     } catch {
-      return [];
+      return this.mergeWithFreedocsFreeFeatures([]);
     }
   }
 
@@ -67,9 +77,9 @@ export class LicenseCheckService {
       try {
         // eslint-disable-next-line @typescript-eslint/no-require-imports
         const { getFeaturesForCloudPlan } = require('../../ee/licence/feature-registry');
-        return [...getFeaturesForCloudPlan(plan)];
+        return this.mergeWithFreedocsFreeFeatures(getFeaturesForCloudPlan(plan));
       } catch {
-        return [];
+        return this.mergeWithFreedocsFreeFeatures([]);
       }
     }
 
@@ -95,5 +105,19 @@ export class LicenseCheckService {
     } catch {
       return null;
     }
+  }
+
+  private isFreedocsFreeFeature(feature: string): boolean {
+    return FREEDOCS_FREE_FEATURE_SET.has(feature as FeatureKey);
+  }
+
+  private mergeWithFreedocsFreeFeatures(features: Iterable<string>): string[] {
+    const mergedFeatures = new Set<string>(features);
+
+    for (const feature of FREEDOCS_FREE_FEATURE_SET) {
+      mergedFeatures.add(feature);
+    }
+
+    return [...mergedFeatures];
   }
 }
