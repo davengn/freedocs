@@ -72,10 +72,12 @@ export class WorkspaceController {
       licenseKey = await this.workspaceRepo.findLicenseKeyById(workspace.id);
     }
 
+    const features = this.licenseCheckService.resolveFeatures(licenseKey, plan);
+
     return {
       cloud: this.environmentService.isCloud(),
       tier: this.licenseCheckService.resolveTier(licenseKey, plan),
-      features: this.licenseCheckService.resolveFeatures(licenseKey, plan),
+      features,
     };
   }
 

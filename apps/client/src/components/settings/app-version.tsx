@@ -33,22 +33,13 @@ export default function AppVersion() {
           inline
           size={16}
           position="middle-end"
-          style={{ cursor: "pointer" }}
           disabled={!hasUpdate}
-          onClick={() => {
-            window.open(
-              "https://github.com/docmost/docmost/releases",
-              "_blank",
-            );
-          }}
         >
           <Text
             size="sm"
             c="dimmed"
-            component="a"
+            component="span"
             mr={45}
-            href="https://github.com/docmost/docmost/releases"
-            target="_blank"
           >
             {appVersion?.currentVersion && <>v{appVersion?.currentVersion}</>}
           </Text>

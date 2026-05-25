@@ -191,7 +191,7 @@ export function SearchSpotlightFilters({
                   <Text size="sm">{option.label}</Text>
                   {option.disabled && (
                     <Badge size="xs" mt={4}>
-                      {t("Enterprise")}
+                      {t("Policy")}
                     </Badge>
                   )}
                   {!option.disabled &&

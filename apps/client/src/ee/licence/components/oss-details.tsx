@@ -1,20 +1,14 @@
 import { Group, List, Stack, Table, Text, ThemeIcon } from "@mantine/core";
 import { IconCheck } from "@tabler/icons-react";
 
-const enterpriseFeatures = [
+const freedocsFeatures = [
   "AI Integration (Chat, Search & Assistant)",
   "MCP Support",
-  "SSO (SAML, OIDC, LDAP)",
-  "SCIM Provisioning",
-  "Multi-factor Authentication (2FA)",
   "Page-level Permissions",
   "Page Verification & Approval Workflow",
-  "Audit Logs",
-  "Enterprise Controls",
-  "API Keys",
-  "Advanced Search Engine Support",
   "Full-text Search in Attachments (PDF, DOCX)",
   "Resolve Comments",
+  "Workspace and space public sharing controls",
   "Confluence Import",
   "PDF & DOCX Import",
   "Templates",
@@ -35,7 +29,7 @@ export default function OssDetails() {
               <Table.Th w={160}>Edition</Table.Th>
               <Table.Td>
                 <Group wrap="nowrap">
-                  Open Source
+                  Freedocs Free
                   <div>
                     <ThemeIcon
                       color="green"
@@ -54,7 +48,7 @@ export default function OssDetails() {
       </Table.ScrollContainer>
 
       <Stack gap="md">
-        <Text fw={500}>Upgrade to the Enterprise Edition to unlock:</Text>
+        <Text fw={500}>Included in Freedocs:</Text>
 
         <List
           spacing={4}
@@ -65,37 +59,14 @@ export default function OssDetails() {
             </ThemeIcon>
           }
         >
-          {enterpriseFeatures.map((feature) => (
+          {freedocsFeatures.map((feature) => (
             <List.Item key={feature}>{feature}</List.Item>
           ))}
         </List>
 
         <Text size="sm" c="dimmed">
-          Get an enterprise trial key at{" "}
-          <a
-            href="https://customers.docmost.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            customers.docmost.com
-          </a>
-          .
-        </Text>
-
-        <Text size="sm" c="dimmed">
-          Visit{" "}
-          <a
-            href="https://docmost.com/pricing"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            docmost.com/pricing
-          </a>{" "}
-          to purchase an enterprise license.
-        </Text>
-        <Text size="sm" c="dimmed">
-          For inquiries, contact{" "}
-          <a href="mailto:sales@docmost.com">sales@docmost.com</a>
+          These capabilities are included in Freedocs. Administrators can still
+          limit access with roles and workspace policies.
         </Text>
       </Stack>
     </Stack>

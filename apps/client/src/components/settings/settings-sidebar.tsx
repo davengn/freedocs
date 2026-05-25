@@ -131,9 +131,9 @@ const groupedData: DataGroup[] = [
     heading: "System",
     items: [
       {
-        label: "License & Edition",
+        label: "Product scope",
         icon: IconKey,
-        path: "/settings/license",
+        path: "/settings/product-scope",
       },
     ],
   },
@@ -199,7 +199,7 @@ export default function SettingsSidebar() {
             case "Billing":
               prefetchHandler = prefetchBilling;
               break;
-            case "License & Edition":
+            case "Product scope":
               if (entitlements?.tier !== "free") {
                 prefetchHandler = prefetchLicense;
               }
@@ -304,13 +304,8 @@ export default function SettingsSidebar() {
 
       {isCloud() && (
         <div className={classes.text}>
-          <Text
-            size="sm"
-            c="dimmed"
-            component="a"
-            href="mailto:help@docmost.com"
-          >
-            help@docmost.com
+          <Text size="sm" c="dimmed">
+            {t("Contact your workspace administrator")}
           </Text>
         </div>
       )}

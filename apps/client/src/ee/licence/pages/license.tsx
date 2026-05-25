@@ -22,9 +22,9 @@ export default function License() {
   return (
     <>
       <Helmet>
-        <title>License - {getAppName()}</title>
+        <title>Product scope - {getAppName()}</title>
       </Helmet>
-      <SettingsTitle title="License" />
+      <SettingsTitle title="Product scope" />
 
       <ActivateLicenseForm />
 

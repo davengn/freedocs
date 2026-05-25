@@ -146,11 +146,11 @@ export class SpaceService {
         typeof updateSpaceDto.disablePublicSharing !== 'undefined' &&
         !this.licenseCheckService.hasFeature(
           workspace.licenseKey,
-          Feature.SECURITY_SETTINGS,
+          Feature.SHARING_CONTROLS,
           workspace.plan,
         )
       ) {
-        throw new ForbiddenException('This feature requires a valid license');
+        throw new ForbiddenException('This feature is disabled by policy');
       }
 
       if (
@@ -161,7 +161,9 @@ export class SpaceService {
           workspace.plan,
         )
       ) {
-        throw new ForbiddenException('This feature requires a valid license');
+        throw new ForbiddenException(
+          'This feature is not available in the current workspace',
+        );
       }
     }
 

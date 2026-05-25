@@ -20,3 +20,24 @@ export const Feature = {
   TEMPLATES: 'templates',
   VIEWER_COMMENTS: 'comment:viewer',
 } as const;
+
+export type FeatureKey = (typeof Feature)[keyof typeof Feature];
+
+export const FREEDOCS_FREE_FEATURES = [
+  Feature.AI,
+  Feature.MCP,
+  Feature.CONFLUENCE_IMPORT,
+  Feature.DOCX_IMPORT,
+  Feature.PDF_IMPORT,
+  Feature.ATTACHMENT_INDEXING,
+  Feature.COMMENT_RESOLUTION,
+  Feature.SHARING_CONTROLS,
+  Feature.TEMPLATES,
+  Feature.VIEWER_COMMENTS,
+  Feature.PAGE_PERMISSIONS,
+  Feature.PAGE_VERIFICATION,
+] as const satisfies readonly FeatureKey[];
+
+export const FREEDOCS_FREE_FEATURE_SET: ReadonlySet<FeatureKey> = new Set(
+  FREEDOCS_FREE_FEATURES,
+);

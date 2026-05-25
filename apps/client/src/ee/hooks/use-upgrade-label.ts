@@ -9,8 +9,8 @@ export function useUpgradeLabel(): string {
 
   if (!isCloud()) {
     return entitlements != null && entitlements.tier !== "free"
-      ? t("Upgrade your license tier.")
-      : t("Available with a paid license");
+      ? t("Unavailable for the current workspace policy.")
+      : t("Managed by workspace policy");
   }
-  return t("Upgrade your plan");
+  return t("Managed by workspace policy");
 }
