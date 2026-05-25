@@ -1,6 +1,6 @@
 # Feature Specification: Freedocs AI Knowledge Assistance
 
-**Feature Branch**: `001-freedocs-enterprise-features`
+**Feature Branch**: `003-freedocs-ai-knowledge-assistance`
 
 **Feature Directory**: `003-freedocs-ai-knowledge-assistance`
 
